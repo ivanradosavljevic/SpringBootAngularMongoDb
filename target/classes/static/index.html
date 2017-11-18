@@ -1,0 +1,70 @@
+<html ng-app="uploadApp">
+<head>
+<meta charset="utf8" />
+<title>Document Upload</title>
+<link rel="stylesheet" href="styles/bootstrap.min.css"> 
+<link rel="stylesheet" href="styles/md-data-table.css">
+<link rel="stylesheet" href="styles/angular-material.css">
+</head>
+<body ng-controller="docController">
+<md-toolbar>
+Deploy Test
+</md-toolbar>
+<md-tabs md-dynamic-height>
+<md-tab label="UPLOAD">
+<div class="container">
+		<div class="col-md-6">
+		<div class="row">
+            <h2>Upload Document</h2>
+            <table class="table table-bordered">
+                <tr>
+                    <td><input type="file" class="custom-file-input" file-model="file"></td>
+
+                </tr>
+                <tr>
+                    <td><button ng-click="upload()">Upload</button></td>
+                </tr>
+            </table>
+        </div>            
+	</div>
+    </div>
+</md-tab>
+<md-tab label="TABLE"> 
+<md-table-container>
+  <table md-table md-progress="promise">
+    <thead md-head md-order="myOrder" md-on-reorder="logOrder">
+      <tr md-row>        
+        <th md-column>Client id</th>
+        <th md-column md-order-by="clientName">Client Name</th>
+        <th md-column md-order-by="fileName">File Name</th>
+        <th md-column md-order-by="intputDate">Input Date</th>
+      </tr>
+    </thead>
+    <tbody md-body>
+      <tr md-row md-select="ingestor" md-select-id="name" md-auto-select ng-repeat="ingestor in ingestors.data | orderBy:myOrder">
+        <td md-cell ng-click ="details(ingestor)">{{ingestor.clientId}}</td>
+        <td md-cell ng-click ="details(ingestor)">{{ingestor.clientName}}</td>
+        <td md-cell ng-click ="details(ingestor)">{{ingestor.fileName}}</td>
+        <td md-cell ng-click ="details(ingestor)">{{ingestor.inputDate}}</td>
+      </tr>      
+    </tbody>
+  </table>
+</md-table-container>
+<md-table-pagination md-limit="query.limit" md-limit-options="[20,50,100]" md-page="query.page" md-total="{{totalNumberOfRecords}}" md-page-select md-on-paginate="logPagination"></md-table-pagination>
+
+
+</md-tab>
+</md-tabs>
+	<script src="lib/plugin/moment.js"></script>
+    <script src="lib/plugin/jquery-2.2.1.min.js"></script>
+	<script src="lib/plugin/bootstrap.min.js"></script>
+	<script src="lib/plugin/angular.min.js"></script>
+	<script src="lib/plugin/angular-aria.min.js"></script>
+	<script src="lib/plugin/angular-animate.min.js"></script>
+	<script src="lib/plugin/angular-messages.min.js"></script>
+	<script src="lib/plugin/angular-material.min.js"></script>
+	<script src="lib/plugin/md-data-table.min.js"></script>	
+	<script src="documentService.js"></script>
+	<script src="app.js"></script>
+</body>
+</html>
